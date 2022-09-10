@@ -1,0 +1,24 @@
+body {
+	display: grid;
+	grid-template-columns: 70% auto;
+	grid-template-rows: auto auto;
+    font-family: 'Courier New', Courier, monospace;
+    background: rgba(215, 215, 215);
+}
+
+header {
+	grid-column: span 2;
+	text-align: center;
+}
+
+div {
+	border: thin solid black;
+	margin: 1em;
+}
+h2 {
+	text-align: center;
+}
+
+center {
+    text-align: center;
+}

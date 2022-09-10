@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L04_Einkaufsliste</title>
+    <script src="https://kit.fontawesome.com/bfc3459343.js" crossorigin="anonymous"></script>
+    <link rel="Stylesheet" href="L04Style.css">
+    <script src="L04Data.js"></script>
+    <script src="L04GenerateContent.js"></script>
+    <script src="L04Script.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1> SHOPPING LIST</h1>
+        <p>Use the form on the left to create a new entry and submit it via the button. On the right hand side you can see what you need to buy. Enjoy.</p>
+    </header>
+    
+    <form>
+
+        <div id="form">
+
+            <h2>New Entry</h2>
+            
+            <fieldset id="Name">
+                <legend>Name</legend>
+            </fieldset>
+            
+            <fieldset id="Count">
+                <legend>Count</legend>
+            </fieldset>
+            
+            <fieldset id="Comment">
+                <legend>Comment</legend>
+            </fieldset>
+
+
+            <!--<fieldset id="Category">
+                <legend>Category</legend>
+            </fieldset>-->
+            
+
+
+        </div>
+
+    </form>
+
+    <div id="ToBuy">
+        <h2>To Buy</h2>
+        <div id="list">
+            ...
+        </div>
+    </div>
+
+    <button id="add">Add Me</button>
+</body>
+</html>
