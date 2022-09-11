@@ -1,6 +1,8 @@
 namespace L06_Einkaufsliste {
     export interface Item {
         name: string;
+        count: string;
+        comment: string;
     }
 
     export interface Data {
