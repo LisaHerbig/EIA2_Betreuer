@@ -29,7 +29,8 @@ var L06_Einkaufsliste;
     async function sendEntry() {
         let form = document.querySelector("#form");
         let formData = new FormData(form);
-        let json = {};
+        let date = getDate();
+        let json = { "date": date, "bought": "false" };
         for (let key of formData.keys())
             if (!json[key]) {
                 let values = formData.getAll(key);
@@ -39,7 +40,7 @@ var L06_Einkaufsliste;
         query.set("command", "insert");
         query.set("collection", "Entries");
         query.set("data", JSON.stringify(json));
-        console.log(query.toString() + "     queryToString");
+        console.log(query.toString() + "     queryToString" + "date:xyz");
         let response = await fetch(url + "?" + query.toString());
         let responseText = await response.text();
         alert(responseText + " :)");
@@ -86,11 +87,12 @@ var L06_Einkaufsliste;
             let entryItem = _idItem[entry];
             console.log(entry + " itemENtryGetItems");
             let entryItemString = String(entry);
-            let itemId = [entryItem.name, entryItem.count, entryItem.comment, entryItemString];
+            let itemId = [entryItem.name, entryItem.count, entryItem.comment, entryItemString, entryItem.bought, entryItem.date];
             console.log(entryItem.name, entryItem.count, entryItem.comment);
             createList(itemId);
         }
     }
+    let checked;
     function createList(_itemAndId) {
         let list = document.querySelector("#list");
         console.log("List ItemAndID: " + _itemAndId);
@@ -104,7 +106,17 @@ var L06_Einkaufsliste;
         newEntry.innerText = article + " - " + count + " - " + comment + " " + date;
         let radio = document.createElement("input");
         radio.type = "radio";
-        radio.setAttribute("class", "center");
+        console.log(_itemAndId[4] + "ITEMandID[4]");
+        if (_itemAndId[4] == "false") {
+            console.log("status=false");
+            checked = false;
+        }
+        else if (_itemAndId[4] == "true") {
+            console.log("status=true");
+            checked = true;
+        }
+        radio.checked = checked;
+        radio.addEventListener("pointerdown", handleBought);
         newEntry.appendChild(radio);
         let trash = document.createElement("i");
         trash.setAttribute("class", "fa-solid fa-trash-can");
@@ -113,6 +125,25 @@ var L06_Einkaufsliste;
         newEntry.appendChild(trash);
         list.appendChild(newEntry);
         update = false;
+    }
+    async function handleBought(_event) {
+        console.log("handleBought");
+        let target = _event.target;
+        let parent = target.parentElement;
+        let id = parent.className;
+        let json = { "bought": "true" };
+        let data = JSON.stringify(json);
+        let query = new URLSearchParams();
+        query.set("command", "update");
+        query.set("collection", "Entries");
+        query.set("id", id);
+        query.set("data", data);
+        query.toString();
+        console.log(query + " queryCommandFind");
+        let response = await fetch(url + "?" + query.toString());
+        let responseText = await response.text();
+        alert(responseText);
+        location.reload();
     }
     async function handleDelete(_event) {
         let target = _event.target;
